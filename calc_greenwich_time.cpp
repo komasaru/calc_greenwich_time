@@ -21,7 +21,6 @@
                無指定なら現在(システム日時)を JST とみなす。
 ***********************************************************/
 #include "common.hpp"
-#include "file.hpp"
 #include "greenwich.hpp"
 
 #include <cstdlib>   // for EXIT_XXXX
@@ -47,10 +46,6 @@ int main(int argc, char* argv[]) {
   std::string gast_hms;  // GAST(hms)
   std::string gmst_hms;  // GMST(hms)
   std::string ee_hms;    // EE(hms)
-  std::vector<std::vector<std::string>> l_ls;    // List of Leap Second
-  std::vector<std::vector<std::string>> l_dut;   // List of DUT1
-  std::vector<std::vector<double>>      dat_ls;  // data of lunisolar parameters
-  std::vector<std::vector<double>>      dat_pl;  // data of planetary parameters
 
   try {
     // 日付取得
@@ -79,19 +74,11 @@ int main(int argc, char* argv[]) {
       }
     }
 
-    // うるう秒, DUT1 一覧、
-    // lunisolra, planetary パラメータ一覧取得
-    ns::File o_f;
-    if (!o_f.get_leap_sec_list(l_ls)) throw;
-    if (!o_f.get_dut1_list(l_dut))    throw;
-    if (!o_f.get_param_ls(dat_ls))    throw;
-    if (!o_f.get_param_pl(dat_pl))    throw;
-
     // JST -> UTC
     utc = ns::jst2utc(jst);
 
     // Calculation & Display
-    ns::Greenwich o_gr(utc, l_ls, l_dut, dat_ls, dat_pl);
+    ns::Greenwich o_gr(utc);
     gast = o_gr.gast;
     gmst = o_gr.gmst;
     ee   = o_gr.ee;

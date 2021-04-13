@@ -15,22 +15,17 @@ class Greenwich {
   std::vector<std::vector<std::string>> l_dut;   // List of DUT1
   std::vector<std::vector<double>>      dat_ls;  // data of lunisolar parameters
   std::vector<std::vector<double>>      dat_pl;  // data of planetary parameters
-  double jd;               // JD(ユリウス日 for UTC)
-  double jcn;              // JCN(T; ユリウス世紀数 for UTC)
-  double jd_ut1;           // JD(ユリウス日 for UT1)
-  double jd_2k_ut1;        // JD(ユリウス日 from 2000 for UT1)
-  double r_mtx[3][3];      // 回転行列（バイアス＆歳差＆章動）
-  double x;                // x of CIP
-  double y;                // y of CIP
-  double s;                // CIO locator
+  double jd;           // JD(ユリウス日 for UTC)
+  double jcn;          // JCN(T; ユリウス世紀数 for UTC)
+  double jd_ut1;       // JD(ユリウス日 for UT1)
+  double jd_2k_ut1;    // JD(ユリウス日 from 2000 for UT1)
+  double r_mtx[3][3];  // 回転行列（バイアス＆歳差＆章動）
+  double x;            // x of CIP
+  double y;            // y of CIP
+  double s;            // CIO locator
 
 public:
-  Greenwich(
-      struct timespec,
-      std::vector<std::vector<std::string>>&,
-      std::vector<std::vector<std::string>>&,
-      std::vector<std::vector<double>>&,
-      std::vector<std::vector<double>>&);  // コンストラクタ
+  Greenwich(struct timespec);  // コンストラクタ
   struct timespec utc;         // UTC
   struct timespec ut1;         // UT1
   struct timespec tt;          // TT
